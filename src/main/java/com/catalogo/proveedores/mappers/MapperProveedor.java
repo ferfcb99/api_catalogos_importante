@@ -2,6 +2,7 @@ package com.catalogo.proveedores.mappers;
 
 import com.catalogo.proveedores.entities.Proveedor;
 import com.catalogo.proveedores.models.ProveedorDTO;
+import com.catalogo.proveedores.utils.InputValidator;
 
 import java.sql.Timestamp;
 import java.time.Instant;
@@ -13,7 +14,7 @@ public class MapperProveedor {
     public static ProveedorDTO mapEntityToDTO(Proveedor proveedor) {
         ProveedorDTO proveedorDTO = new ProveedorDTO();
         proveedorDTO.setId(proveedor.getId());
-        proveedorDTO.setNombre(proveedor.getNombre());
+        proveedorDTO.setNombre(InputValidator.sanitizeInput(proveedor.getNombre()));
         proveedorDTO.setEmail(proveedor.getEmail());
         proveedorDTO.setTelefono(proveedor.getTelefono());
         proveedorDTO.setDireccion(proveedor.getDireccion());
@@ -34,7 +35,7 @@ public class MapperProveedor {
     public static Proveedor mapDTOToEntity(ProveedorDTO proveedorDTO) {
         Proveedor proveedor = new Proveedor();
         proveedor.setId(proveedorDTO.getId());
-        proveedor.setNombre(proveedorDTO.getNombre());
+        proveedor.setNombre(InputValidator.sanitizeInput(proveedorDTO.getNombre()));
         proveedor.setEmail(proveedorDTO.getEmail());
         proveedor.setTelefono(proveedorDTO.getTelefono());
         proveedor.setDireccion(proveedorDTO.getDireccion());

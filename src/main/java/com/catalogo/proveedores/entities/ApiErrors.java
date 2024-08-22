@@ -27,27 +27,16 @@ public class ApiErrors implements Serializable {
     @Column(name = "created_at", unique = false, columnDefinition="TIMESTAMP")
     private Timestamp createAt;
 
-    @Column(name = "url", nullable = false, unique = false, length = 2048)
-    private String url;
-
-    @Column(name = "uri", nullable = false, unique = false, length = 2048)
-    private String uri;
-
-    @Column(name = "method_type", nullable = false, unique = false, length = 10)
-    private String methodType;
 
     public ApiErrors() {
     }
 
-    public ApiErrors(Integer id, String code, String body, String message, Timestamp createAt, String url, String uri, String methodType) {
+    public ApiErrors(Integer id, String code, String body, String message, Timestamp createAt) {
         this.id = id;
         this.code = code;
         this.body = body;
         this.message = message;
         this.createAt = createAt;
-        this.url = url;
-        this.uri = uri;
-        this.methodType = methodType;
     }
 
     public Integer getId() {
@@ -90,30 +79,6 @@ public class ApiErrors implements Serializable {
         this.createAt = createAt;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getUri() {
-        return uri;
-    }
-
-    public void setUri(String uri) {
-        this.uri = uri;
-    }
-
-    public String getMethodType() {
-        return methodType;
-    }
-
-    public void setMethodType(String methodType) {
-        this.methodType = methodType;
-    }
-
     @Override
     public String toString() {
         return "ApiErrors{" +
@@ -122,9 +87,6 @@ public class ApiErrors implements Serializable {
                 ", body='" + body + '\'' +
                 ", message='" + message + '\'' +
                 ", createAt=" + createAt +
-                ", url='" + url + '\'' +
-                ", uri='" + uri + '\'' +
-                ", methodType='" + methodType + '\'' +
                 '}';
     }
 }

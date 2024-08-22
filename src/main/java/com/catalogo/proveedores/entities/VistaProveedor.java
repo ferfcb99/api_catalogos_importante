@@ -1,15 +1,16 @@
-package com.catalogo.proveedores.models;
+package com.catalogo.proveedores.entities;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+
+import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.io.Serializable;
+import javax.persistence.Table;
 import java.sql.Timestamp;
 
+@Entity
+@Table(name = "vista_proveedores")
+public class VistaProveedor {
 
-public class ProveedorDTO implements Serializable {
-
+    @Id
     private Long id;
 
     private String nombre;
@@ -22,10 +23,10 @@ public class ProveedorDTO implements Serializable {
 
     private Timestamp fechaRegistro;
 
-    public ProveedorDTO() {
+    public VistaProveedor() {
     }
 
-    public ProveedorDTO(Long id, String nombre, String direccion, String telefono, String email, Timestamp fechaRegistro) {
+    public VistaProveedor(Long id, String nombre, String direccion, String telefono, String email, Timestamp fechaRegistro) {
         this.id = id;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -86,7 +87,7 @@ public class ProveedorDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "ProveedorDTO{" +
+        return "Proveedor{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", direccion='" + direccion + '\'' +

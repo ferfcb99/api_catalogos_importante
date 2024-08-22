@@ -1,93 +1,93 @@
 package com.catalogo.proveedores.exceptions;
 
+import java.io.Serial;
+
+/**
+ * The type Validaciones exception.
+ *
+ * @author fernando.munguia
+ */
 public class NotContentException extends RuntimeException {
 
     /**
-     * serial
+     * Serial
      */
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
-     * Codigo de error
+     * Code status exception
      */
-    private final String codigo;
+    private final String code;
 
     /**
-     * Descripcion del error
+     * Description exception
      */
-    private final String descripcion;
-
+    private final String description;
 
     /**
-     * Mensaje personalizado del error
-     */
-    private final String mensaje;
-
-
-    /**
-     * manejo del mensaje de error
+     * Instantiates a new Validaciones exception.
      *
-     * @param message
+     * @param message the message
      */
     public NotContentException(final String message) {
-
         super(message);
-        this.codigo = null;
-        this.descripcion = message;
-        this.mensaje = null;
+        this.code = null;
+        this.description = message;
     }
 
     /**
-     * manejo del mensaje y codigo de error
+     * Instantiates a new Validaciones exception.
      *
-     * @param message
-     * @param codigo
+     * @param code    the code
+     * @param message the message
      */
-    public NotContentException( final String codigo, final String message, final String mensaje) {
+    public NotContentException(final String code, final String message) {
 
         super(message);
-        this.codigo = codigo;
-        this.descripcion = message;
-        this.mensaje = mensaje;
+        this.code = code;
+        this.description = message;
     }
 
     /**
-     * Manejo de Error
+     * Instantiates a new Validaciones exception.
      *
-     * @param message
-     * @param throwable
+     * @param message   the message
+     * @param throwable the throwable
      */
     public NotContentException(final String message, final Throwable throwable) {
 
         super(message, throwable);
-        this.codigo = null;
-        this.descripcion = null;
-        this.mensaje = null;
+        this.code = null;
+        this.description = null;
     }
 
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public String getMensaje() {
-        return mensaje;
-    }
-
-    /*
-     * (non-Javadoc)
+    /**
+     * Gets code.
      *
-     * @see java.lang.Object#toString()
+     * @return the code
+     */
+    public String getCode() {
+        return code;
+    }
+
+    /**
+     * Gets description.
+     *
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * {@inheritDoc}
      */
     @Override
     public String toString() {
-        return "ValidacionesException{" +
-                "codigo='" + codigo + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                ", mensaje='" + mensaje + '\'' +
+        return "NotContentException{" +
+                "code='" + code + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }

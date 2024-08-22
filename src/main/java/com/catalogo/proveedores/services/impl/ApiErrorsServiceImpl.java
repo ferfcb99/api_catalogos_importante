@@ -20,8 +20,14 @@ public class ApiErrorsServiceImpl implements ApiErrorsService {
 
     @Override
     public ApiErrors saveError(ApiErrors apiErrors) {
-        ApiErrors saved = this.apiErrorsRepository.save(apiErrors);
-        log.info("Se guardo el error: {}", saved);
-        return saved;
+            try{
+                ApiErrors saved = this.apiErrorsRepository.save(apiErrors);
+                log.info("Se guardo el error: {}", saved);
+                return saved;
+            }catch(Exception e){
+                throw new UnknownError("Error al guardar el error");
+            }
+
+
     }
 }
