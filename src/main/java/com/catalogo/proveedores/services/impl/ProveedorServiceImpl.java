@@ -43,9 +43,9 @@ public class ProveedorServiceImpl implements ProveedorService {
     @Transactional
     public List<ProveedorDTO> getAll() {
         List<Proveedor> proveedores;
-        // List<ProveedorDTO> proveedorDTOs = new ArrayList<>();
+
         try {
-            proveedores = new ArrayList<>();
+            proveedores = this.proveedorRepository.findAll();
         } catch (Exception e) {
             log.error(e.getMessage());
             throw new ValidacionesException(ConstantsExceptions.CODE_ERROR_500, ConstantsExceptions.DESCRIPTION_ERROR_500);
