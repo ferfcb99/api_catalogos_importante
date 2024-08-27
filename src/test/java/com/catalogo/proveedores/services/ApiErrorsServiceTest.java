@@ -1,6 +1,7 @@
 package com.catalogo.proveedores.services;
 
 import com.catalogo.proveedores.entities.ApiErrors;
+import com.catalogo.proveedores.exceptions.CatalogException;
 import com.catalogo.proveedores.repositories.ApiErrorsRepository;
 import com.catalogo.proveedores.services.impl.ApiErrorsServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -45,7 +46,7 @@ public class ApiErrorsServiceTest {
     @Test
     public void saveErrorExceptionTest() {
     	Mockito.when(this.apiErrorsRepository.save(this.apiErrors)).thenThrow(new RuntimeException());
-    	assertThrows(UnknownError.class, () -> this.apiErrorsService.saveError(apiErrors));
+    	assertThrows(CatalogException.class, () -> this.apiErrorsService.saveError(apiErrors));
     }
 
 }

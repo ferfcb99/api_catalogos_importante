@@ -1,7 +1,6 @@
 package com.catalogo.proveedores.mappers;
 
 import com.catalogo.proveedores.entities.ApiErrors;
-import com.catalogo.proveedores.exceptions.ValidacionesException;
 
 import java.sql.Timestamp;
 

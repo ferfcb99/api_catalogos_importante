@@ -3,8 +3,7 @@ package com.catalogo.proveedores.services.impl;
 import com.catalogo.proveedores.constants.ConstantsExceptions;
 import com.catalogo.proveedores.entities.Proveedor;
 import com.catalogo.proveedores.entities.VistaProveedor;
-import com.catalogo.proveedores.exceptions.NotContentException;
-import com.catalogo.proveedores.exceptions.ValidacionesException;
+import com.catalogo.proveedores.exceptions.CatalogException;
 import com.catalogo.proveedores.mappers.MapperProveedor;
 import com.catalogo.proveedores.models.ProveedorDTO;
 import com.catalogo.proveedores.models.ProveedorShortData;
@@ -45,14 +44,14 @@ public class ProveedorServiceImpl implements ProveedorService {
         List<Proveedor> proveedores;
 
         try {
-            proveedores = this.proveedorRepository.findAll();
+            proveedores = new ArrayList<>();
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new ValidacionesException(ConstantsExceptions.CODE_ERROR_500, ConstantsExceptions.DESCRIPTION_ERROR_500);
+            throw new CatalogException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al consultar los proveedores");
         }
         if (proveedores.isEmpty()) {
             log.info("entro aqui");
-            throw new NotContentException(ConstantsExceptions.CODE_ERROR_204, ConstantsExceptions.DESCRIPTION_ERROR_204);
+            throw new CatalogException(HttpStatus.NO_CONTENT, "No existen registros");
         }
 
         /*

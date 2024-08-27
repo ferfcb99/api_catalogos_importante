@@ -1,10 +1,12 @@
 package com.catalogo.proveedores.services.impl;
 
 import com.catalogo.proveedores.entities.ApiErrors;
+import com.catalogo.proveedores.exceptions.CatalogException;
 import com.catalogo.proveedores.repositories.ApiErrorsRepository;
 import com.catalogo.proveedores.services.ApiErrorsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,7 +27,7 @@ public class ApiErrorsServiceImpl implements ApiErrorsService {
                 log.info("Se guardo el error: {}", saved);
                 return saved;
             }catch(Exception e){
-                throw new UnknownError("Error al guardar el error");
+                throw new CatalogException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al guardar el error");
             }
 
 
