@@ -9,12 +9,14 @@ import com.catalogo.proveedores.models.ProveedorDTO;
 import com.catalogo.proveedores.models.ProveedorShortData;
 import com.catalogo.proveedores.repositories.ProveedorRepository;
 import com.catalogo.proveedores.repositories.ProveedorViewRepository;
+import com.catalogo.proveedores.services.EmailService;
 import com.catalogo.proveedores.services.ProveedorService;
 import com.catalogo.proveedores.utils.InputValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,10 +34,16 @@ public class ProveedorServiceImpl implements ProveedorService {
 
     private ProveedorViewRepository proveedorViewRepository;
 
+    private EmailService emailService;
+
+    //Importante hacer la inyección de dependencia de JavaMailSender:
+    private JavaMailSender mailSender;
+
     @Autowired
-    public ProveedorServiceImpl(ProveedorRepository proveedorRepository, ProveedorViewRepository proveedorViewRepository) {
+    public ProveedorServiceImpl(ProveedorRepository proveedorRepository, ProveedorViewRepository proveedorViewRepository, EmailService emailService, JavaMailSender mailSender) {
         this.proveedorRepository = proveedorRepository;
         this.proveedorViewRepository = proveedorViewRepository;
+        this.emailService = emailService;
     }
 
     @Override
@@ -44,7 +52,7 @@ public class ProveedorServiceImpl implements ProveedorService {
         List<Proveedor> proveedores;
 
         try {
-            proveedores = new ArrayList<>();
+            proveedores = new ArrayList<>(); //this.proveedorRepository.findAll();
         } catch (Exception e) {
             log.error(e.getMessage());
             throw new CatalogException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al consultar los proveedores");
@@ -53,6 +61,8 @@ public class ProveedorServiceImpl implements ProveedorService {
             log.info("entro aqui");
             throw new CatalogException(HttpStatus.NO_CONTENT, "No existen registros");
         }
+
+
 
         /*
         List<VistaProveedor> vistaProveedores = this.proveedorViewRepository.findAll();
