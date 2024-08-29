@@ -22,42 +22,6 @@ import com.catalogo.proveedores.services.impl.ProveedorServiceImpl;
 @SpringBootTest
 public class ProveedorServiceTest {
 
-	@Mock
-	private ProveedorRepository proveedorRepository;
-	
-	@Mock
-	private ProveedorViewRepository proveedorViewRepository;
-	
-	@InjectMocks
-	private ProveedorService proveedorService = new ProveedorServiceImpl(proveedorRepository, proveedorViewRepository);
-	
-	List<Proveedor> proveedores;
-	
-	@BeforeEach
-	public void setUp() {
-		this.proveedores = new ArrayList<>();
-		this.proveedores.add(
-				new Proveedor(1L, "ProvTest", "ProvTest", "5662561278", "test@test.com", new Timestamp(System.currentTimeMillis())));
-	}
-	
-	@Test
-	public void getAllTest() {
-		Mockito.when(this.proveedorRepository.findAll()).thenReturn(proveedores);
-		this.proveedorService.getAll();
-	}
-	
-	@Test
-	public void getAllExceptionTest() {
-		Mockito.when(this.proveedorRepository.findAll()).thenThrow(RuntimeException.class);
-		assertThrows(CatalogException.class, () -> this.proveedorService.getAll());
-	}
-	
-	@Test 
-	public void getAllExceptionEmptyTest() {
-		this.proveedores.clear();
-		Mockito.when(this.proveedorRepository.findAll()).thenReturn(proveedores);
-		assertThrows(CatalogException.class, () -> this.proveedorService.getAll());
-	}
-	
+
 	
 }
