@@ -42,8 +42,18 @@ public class ExceptionGlobalHandlerImpl implements ExceptionGlobalHandler {
     @ExceptionHandler(CatalogException.class)
     public ResponseEntity<ResponseAPIException> handlePeronalizedException(CatalogException e) {
         log.info("{}", e.getMessage().toString());
-        this.emailService.sendEmail(new String[]{"fer_fcb99@outlook.com"}, "Prueba", "Mensaje de error de api");
+        this.emailService.sendEmail(new String[]{"fer_fcb99@outlook.com"}, "Prueba", crearBody());
         return ResponseEntity.status(e.getHttpStatus())
                 .body(new ResponseAPIException(String.valueOf(e.getHttpStatus()), e.getMessage()));
     }
+
+    public String crearBody(){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("<div>\n");
+        stringBuilder.append("<h1>Esto es un titulo</h1>\n");
+        stringBuilder.append("<h1>Esto es otro titulo</h1>\n");
+        stringBuilder.append("</div>\n");
+        return stringBuilder.toString();
+    }
+
 }

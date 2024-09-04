@@ -52,7 +52,7 @@ public class ProveedorServiceImpl implements ProveedorService {
         List<Proveedor> proveedores;
 
         try {
-            proveedores = new ArrayList<>(); //this.proveedorRepository.findAll();
+            proveedores = new ArrayList<>();
         } catch (Exception e) {
             log.error(e.getMessage());
             throw new CatalogException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al consultar los proveedores");
