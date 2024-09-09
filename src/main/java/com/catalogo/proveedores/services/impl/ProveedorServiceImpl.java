@@ -24,6 +24,7 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProveedorServiceImpl implements ProveedorService {
@@ -52,7 +53,7 @@ public class ProveedorServiceImpl implements ProveedorService {
         List<Proveedor> proveedores;
 
         try {
-            proveedores = new ArrayList<>();
+            proveedores = this.proveedorRepository.findAll();
         } catch (Exception e) {
             log.error(e.getMessage());
             throw new CatalogException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al consultar los proveedores");
@@ -103,6 +104,15 @@ public class ProveedorServiceImpl implements ProveedorService {
     @Override
     public List<ProveedorShortData> getShortData() {
         return this.proveedorRepository.getShortData();
+    }
+
+    @Override
+    public ProveedorDTO getById(Long id) {
+        Optional<Proveedor> proveedor = this.proveedorRepository.findById(id);
+        if (proveedor.isPresent()) {
+            return MapperProveedor.mapEntityToDTO(proveedor.get());
+        }
+        return null;
     }
 
 }

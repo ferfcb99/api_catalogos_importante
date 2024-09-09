@@ -14,4 +14,6 @@ public interface ProveedorService {
 
     List<ProveedorShortData> getShortData();
 
+    ProveedorDTO getById(Long id);
+
 }

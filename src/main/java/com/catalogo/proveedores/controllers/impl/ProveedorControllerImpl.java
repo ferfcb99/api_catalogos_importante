@@ -6,6 +6,7 @@ import com.catalogo.proveedores.models.ProveedorDTO;
 import com.catalogo.proveedores.models.ProveedorShortData;
 import com.catalogo.proveedores.publics.ResponseAPI;
 import com.catalogo.proveedores.services.ProveedorService;
+import com.catalogo.proveedores.services.ValidaHeaders;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,9 @@ public class ProveedorControllerImpl implements ProveedorController {
 
     @Autowired
     private ProveedorService proveedorService;
+
+    @Autowired
+    private ValidaHeaders validaHeaders;
 
     @Override
     @GetMapping(value = ConstantsRoutes.GET_ALL, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -43,6 +47,19 @@ public class ProveedorControllerImpl implements ProveedorController {
     public ResponseEntity<ResponseAPI<List<ProveedorShortData>>> getAllShort() {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new ResponseAPI<>(String.valueOf(HttpStatus.OK), this.proveedorService.getShortData(), ""));
+    }
+
+    @Override
+    @GetMapping(value = "/getById/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ResponseAPI<ProveedorDTO>> getById(@PathVariable Long id,
+                                                             @RequestHeader(value = "Authorization", required = true) String authorization,
+                                                             @RequestHeader(value = "X-Client-Id", required = true) String clientId) {
+
+        this.validaHeaders.validaHeaderAuthorization(authorization);
+        this.validaHeaders.validaHeaderAuthorization(clientId);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new ResponseAPI<>(String.valueOf(HttpStatus.OK), this.proveedorService.getById(id), "VALOR DE ID"));
     }
 
 
