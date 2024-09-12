@@ -16,8 +16,6 @@ public interface ProveedorController {
 
     ResponseEntity<ResponseAPI<List<ProveedorShortData>>> getAllShort();
 
-    ResponseEntity<ResponseAPI<ProveedorDTO>> getById(Long id,
-                                                      @RequestHeader(value = "Authorization", required = true) String authorization,
-                                                      @RequestHeader(value = "X-Client-Id", required = true) String clientId);
+    ResponseEntity<ResponseAPI<ProveedorDTO>> getById(Long id);
 
 }

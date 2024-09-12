@@ -19,7 +19,8 @@ import javax.sql.DataSource;
                 "com.catalogo.proveedores.entities",
                 "com.catalogo.proveedores.repositories",
                 "com.catalogo.proveedores.services.impl",
-                "com.catalogo.proveedores.controllers.impl"
+                "com.catalogo.proveedores.controllers.impl",
+                "com.catalogo.proveedores.utils.impl"
         }
 )
 @EnableJpaRepositories(basePackages = {
